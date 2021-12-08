@@ -23,7 +23,19 @@ mongoose
     console.log(err);
   });
 
+//   var whiteList = ['http://localhost:5500', 'http://localhost:5000', 'http://localhost:4200'];
+//   var corsOptions = {
+//     origin: (origin, callback) => {
+//          if (whiteList.indexOf(origin) !== -1)
+//               callback(null, true);
+//          else
+//               callback(new Error("! ! !"));
+//     }
+// }
+  app.use(cors());
   app.use(express.json());
+  app.options('*', cors());
+  
   app.use("/api/product", productRoute);
  app.use("/api/user", userRoute);
  app.use("/api/auth", authRoute);
@@ -37,6 +49,6 @@ mongoose
  app.use("/api/logger", loggerRoute);
 
 
-app.listen(process.env.PORT || 5000, () => {
+app.listen(process.env.PORT || 3000, () => {
   console.log("server running");
 });
