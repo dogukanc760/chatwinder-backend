@@ -17,6 +17,19 @@ router.post("/buy-advert", async (req, res)=>{
     }
 });
 
+//create one advert 
+router.post("/create-advert", async (req, res)=>{
+    const newAdvert = new Advert(req.body);
+    try {
+        const savedAdvert = await newAdvert.save();
+        console.log(req.body.name+" created advert");
+        res.status(200).json(savedAdvert);
+    } catch (error) {
+        res.status(500).json(error);
+    }
+});
+
+
 //get all 
 router.get("/", async (req, res) => {
     try {
@@ -30,20 +43,24 @@ router.get("/", async (req, res) => {
 //getl all adver by user 
 router.get("/getall/:id", async (req, res) => {
     try {
+        //var finalId = req.params.user_id.toString();
+        console.log(req.params.id);
         const users = await Advert.find({
-          user_id: {$regex:req.body.user_id}
+          user_id: {$in:req.params.id}
         });
           // ? await User.find().sort({ _id: -1 }).limit(5)
           // : await User.find();
-    
+         
         res.status(200).json(users);
       } catch (error) {
+          console.log(error);
         res.status(500).json(error);
       }
 });
 
 
 //get one advert 
+
 router.get("/:id", async (req, res) => {
     try {
         const advert = await Advert.findOne({id: req.params.id});

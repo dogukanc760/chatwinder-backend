@@ -33,10 +33,12 @@ router.get("/", async (req, res) => {
 router.get("/get-by-type/:type", async (req, res)=>{
     try {
         const logger = await Logger.find({
-            logLevel: {$regex:req.body.type}
+            logLevel: {$in:[req.params.type]}
         });
+        console.log(req.params.type);
         res.status(200).json(logger);
     } catch (error) {
+        console.log(error)
         res.status(500).json(error);
     }
 });
@@ -45,7 +47,7 @@ router.get("/get-by-type/:type", async (req, res)=>{
 router.get("/get-by-user/:type", async (req, res)=>{
     try {
         const logger = await Logger.find({
-            logUser: {$regex:req.body.type}
+            logUser: {$in:req.params.type}
         });
         res.status(200).json(logger);
     } catch (error) {
@@ -57,11 +59,13 @@ router.get("/get-by-user/:type", async (req, res)=>{
 router.get("/get-by-user-type/:userid/:type", async (req, res)=>{
     try {
         const logger = await Logger.find({
-            logUser: {$regex:req.body.userid},
-            logLevel:{$regex:req.body.type}
+            logUser: {$in:req.params.userid},
+            logLevel:{$in:req.params.type}
         });
         res.status(200).json(logger);
     } catch (error) {
         res.status(500).json(error);
     }
 });
+
+module.exports = router;

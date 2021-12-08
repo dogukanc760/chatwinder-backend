@@ -28,3 +28,5 @@ router.post('/createLobby', async (req, res) => {
     }
    
 });
+
+module.exports = router;

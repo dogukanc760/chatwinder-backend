@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const AdvertSchema = new mongoose.Schema(
     {
         user_id:{type:String, required:true},
+        name:{type:String, required:true},
         title:{type:String, required:true},
         description:{type:String, required:true},
         topic:{type:String, required:true},

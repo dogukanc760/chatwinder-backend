@@ -10,6 +10,9 @@ const cartRoute = require("./routes/cart");
 const imageRoute = require("./routes/image");
 const streamParamsRoute = require("./routes/streamparams");
 const advertRoute = require("./routes/advert");
+const notificationRoute = require("./routes/notification");
+const streamChatRoute = require("./routes/streamchat");
+const loggerRoute = require("./routes/logger");
 var cors = require("cors")
 
 dotenv.config();
@@ -29,6 +32,9 @@ mongoose
  app.use("/api/image", imageRoute);
  app.use("/api/streamparams", streamParamsRoute);
  app.use("/api/advert", advertRoute);
+ app.use("/api/notification", notificationRoute);
+ app.use("/api/streamchat", streamChatRoute);
+ app.use("/api/logger", loggerRoute);
 
 
 app.listen(process.env.PORT || 5000, () => {

@@ -20,12 +20,25 @@ router.get("/", async (req, res) => {
 //get just one image 
 router.get("/find/:id", async (req, res) => {
     try {
-        const image = await Image.findOne({imageId: req.params.id});
+        const image = await Image.find({_id: {$in:[req.params.id]}});
+        console.log(req.params.id);
         res.status(200).json(image);
     } catch (error) {
         res.status(500).json(error);
     }
 });
+
+//get just user image 
+router.get("/find-by-user/:id", async (req, res) => {
+    try {
+        const image = await Image.find({user_id: {$in:[req.params.id]}});
+        console.log(req.params.id);
+        res.status(200).json(image);
+    } catch (error) {
+        res.status(500).json(error);
+    }
+});
+
 
 //create image for user profile 
 router.post("/setprofileimage", async (req, res) => {
