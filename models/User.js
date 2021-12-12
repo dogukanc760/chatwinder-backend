@@ -8,7 +8,7 @@ const UserSchema = new mongoose.Schema(
         name:{type:String, required:true},
         surname:{type:String, required:true},
         password:{type:String, required:true},
-        bioDesc:{type:String, required:true},
+        bioDesc:{type:String, default:null},
         searchType:{type:String, default:null},
         country:{type:String, default:null},
         city:{type:String, default:null},
